@@ -1,0 +1,100 @@
+//Building construction
+class Building {
+    var type: String
+    var level: Int
+    var cost: Int
+    var constructionTime: Double
+
+    init(type: String, level: Int, cost: Int, constructionTime: Double) {
+        self.type = type
+        self.level = level
+        self.cost = cost
+        self.constructionTime = constructionTime
+    }
+
+    func upgrade() {
+        level += 1
+        cost *= 2
+        constructionTime *= 1.5
+    }
+}
+
+//Army recruitment and training
+class Army {
+    var type: String
+    var count: Int
+    var attackPower: Int
+    var defensePower: Int
+    var trainingTime: Double
+
+    init(type: String, count: Int, attackPower: Int, defensePower: Int, trainingTime: Double) {
+        self.type = type
+        self.count = count
+        self.attackPower = attackPower
+        self.defensePower = defensePower
+        self.trainingTime = trainingTime
+    }
+
+    func train() {
+        count += 10
+        attackPower += 2
+        defensePower += 1
+        trainingTime *= 0.8
+    }
+}
+
+//Alliance formation
+class Alliance {
+    var name: String
+    var members: [Player]
+
+    init(name: String, members: [Player]) {
+        self.name = name
+        self.members = members
+    }
+
+    func addMember(player: Player) {
+        members.append(player)
+    }
+
+    func removeMember(player: Player) {
+        if let index = members.firstIndex(of: player) {
+            members.remove(at: index)
+        }
+    }
+}
+
+//Economic management
+class Economy {
+    var resources: [String: Int]
+    var income: [String: Int]
+    var expenses: [String: Int]
+
+    init(resources: [String: Int], income: [String: Int], expenses: [String: Int]) {
+        self.resources = resources
+        self.income = income
+        self.expenses = expenses
+    }
+
+    func updateIncome(resource: String, amount: Int) {
+        income[resource] = amount
+    }
+
+    func updateExpenses(resource: String, amount: Int) {
+        expenses[resource] = amount
+    }
+
+    func checkBalance() -> Bool {
+        for (resource, amount) in income {
+            if resources[resource]! < amount {
+                return false
+            }
+        }
+        for (resource, amount) in expenses {
+            if resources[resource]! < amount {
+                return false
+            }
+        }
+        return true
+    }
+}
